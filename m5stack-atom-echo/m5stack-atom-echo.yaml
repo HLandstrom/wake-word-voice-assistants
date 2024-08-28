@@ -5,9 +5,9 @@ substitutions:
 
 esphome:
   name: ${name}
-  name_add_mac_suffix: true
   friendly_name: ${friendly_name}
   min_version: 2025.2.0
+  name_add_mac_suffix: false
 
 esp32:
   board: m5stack-atom
@@ -18,13 +18,18 @@ esp32:
 
 logger:
 api:
+  encryption:
+    key: ${api_key}
 
 ota:
   - platform: esphome
     id: ota_esphome
+    password: ${ota_password}
 
 wifi:
   ap:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
 
 captive_portal:
 
