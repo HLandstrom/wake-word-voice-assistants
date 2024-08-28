@@ -1,7 +1,5 @@
 ---
 substitutions:
-  name: esp32-s3-box-3
-  friendly_name: ESP32 S3 Box 3
   loading_illustration_file: https://github.com/esphome/wake-word-voice-assistants/raw/main/casita/loading_320_240.png
   idle_illustration_file: https://github.com/esphome/wake-word-voice-assistants/raw/main/casita/idle_320_240.png
   listening_illustration_file: https://github.com/esphome/wake-word-voice-assistants/raw/main/casita/listening_320_240.png
@@ -41,7 +39,12 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   min_version: 2025.2.0
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
+  platformio_options:
+    board_build.flash_mode: dio
+  project:
+    name: esphome.voice-assistant
+    version: "24.7.17.1"
   on_boot:
     priority: 600
     then:
@@ -69,6 +72,8 @@ psram:
   speed: 80MHz
 
 api:
+  encryption:
+    key: ${api_key}
   on_client_connected:
     - script.execute: draw_display
   on_client_disconnected:
@@ -77,11 +82,14 @@ api:
 ota:
   - platform: esphome
     id: ota_esphome
+    password: ${ota_password}
 
 logger:
   hardware_uart: USB_SERIAL_JTAG
 
 wifi:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
   ap:
   on_connect:
     - script.execute: draw_display
@@ -202,6 +210,7 @@ media_player:
       - script.execute: draw_display
 
 micro_wake_word:
+  vad:
   models:
     - ${micro_wake_word_model}
   on_wake_word_detected:
@@ -212,9 +221,11 @@ voice_assistant:
   id: va
   microphone: box_mic
   media_player: speaker_media_player
-  noise_suppression_level: 2
+#speaker: box_speaker
+  noise_suppression_level: 3
   auto_gain: 31dBFS
-  volume_multiplier: 2.0
+  volume_multiplier: 3.0
+  vad_threshold: 3
   on_listening:
     - lambda: id(voice_assistant_phase) = ${voice_assist_listening_phase_id};
     - text_sensor.template.publish:
