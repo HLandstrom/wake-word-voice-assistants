@@ -42,9 +42,6 @@ esphome:
   name_add_mac_suffix: false
   platformio_options:
     board_build.flash_mode: dio
-  project:
-    name: esphome.voice-assistant
-    version: "24.7.17.1"
   on_boot:
     priority: 600
     then:
