@@ -58,7 +58,7 @@ speaker:
 voice_assistant:
   id: va
   microphone: echo_microphone
-  speaker: echo_speaker
+  #speaker: echo_speaker
   noise_suppression_level: 2
   auto_gain: 31dBFS
   volume_multiplier: 2.0
@@ -85,6 +85,14 @@ voice_assistant:
         green: 0%
         brightness: 100%
         effect: none
+  on_tts_end:
+    - homeassistant.service:
+        service: media_player.play_media
+        data:
+          entity_id: media_player.sovrum
+          media_content_id: !lambda 'return x;'
+          media_content_type: music
+          announce: "true"
   on_end:
     - delay: 100ms
     - voice_assistant.stop:
