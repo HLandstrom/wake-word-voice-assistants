@@ -3,7 +3,7 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   name_add_mac_suffix: false
-  min_version: 2024.7.1
+  min_version: 2024.9.0
 
 esp32:
   board: m5stack-atom
@@ -49,7 +49,7 @@ speaker:
     id: echo_speaker
     i2s_dout_pin: GPIO22
     dac_type: external
-    mode: mono
+    channel: mono
 
 voice_assistant:
   id: va
