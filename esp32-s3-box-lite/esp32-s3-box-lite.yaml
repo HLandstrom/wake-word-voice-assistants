@@ -34,7 +34,7 @@ substitutions:
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  min_version: 2024.7.0
+  min_version: 2024.9.0
   name_add_mac_suffix: true
   platformio_options:
     board_build.flash_mode: dio
@@ -93,6 +93,8 @@ wifi:
     - script.execute: draw_display
   on_disconnect:
     - script.execute: draw_display
+
+captive_portal:
 
 button:
   - platform: factory_reset
@@ -751,6 +753,7 @@ display:
   - platform: ili9xxx
     id: s3_box_lcd
     model: S3BOX_LITE
+    invert_colors: false
     data_rate: 40MHz
     cs_pin: 5
     dc_pin: 4
