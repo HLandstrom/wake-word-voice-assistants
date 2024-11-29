@@ -81,6 +81,8 @@ external_components:
     refresh: 0s
 
 api:
+  encryption:
+    key: ${api_key}
   on_client_connected:
     - script.execute: draw_display
   on_client_disconnected:
@@ -89,11 +91,14 @@ api:
 ota:
   - platform: esphome
     id: ota_esphome
+    password: ${ota_password}
 
 logger:
   hardware_uart: USB_SERIAL_JTAG
 
 wifi:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
   ap:
   on_connect:
     - script.execute: draw_display
