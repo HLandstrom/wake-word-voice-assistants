@@ -95,6 +95,7 @@ logger:
 wifi:
   ssid: ${wifi_ssid}
   password: ${wifi_password}
+  use_address: 10.44.4.40
   ap:
   on_connect:
     - script.execute: draw_display
