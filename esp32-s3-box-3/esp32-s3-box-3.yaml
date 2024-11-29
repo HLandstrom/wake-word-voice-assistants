@@ -118,6 +118,13 @@ binary_sensor:
           - ON for at least 10s
         then:
           - button.press: factory_reset_btn
+###### radar sensor ########
+  - platform: gpio
+    pin:
+      number: GPIO21
+    name: "Presence detect"
+    disabled_by_default: false
+    device_class: "occupancy"
 
 output:
   - platform: ledc
