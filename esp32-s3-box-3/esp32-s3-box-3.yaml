@@ -25,6 +25,9 @@ substitutions:
   voice_assist_timer_finished_phase_id: "20"
 
 
+  # Add support for non-unicode characters by using better glyphset
+  font_glyphsets: "GF_Latin_Core"
+
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -693,18 +696,24 @@ font:
       italic: true
     id: font_request
     size: 15
+    glyphsets:
+      - ${font_glyphsets}
   - file:
       type: gfonts
       family: Figtree
       weight: 300
     id: font_response
     size: 15
+    glyphsets:
+      - ${font_glyphsets}
   - file:
       type: gfonts
       family: Figtree
       weight: 300
     id: font_timer
     size: 30
+    glyphsets:
+      - ${font_glyphsets}
 
 text_sensor:
   - id: text_request
