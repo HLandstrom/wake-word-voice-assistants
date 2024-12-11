@@ -35,6 +35,9 @@ substitutions:
 
   micro_wake_word_model: okay_nabu
 
+  # Add support for non-unicode characters by using better glyphset
+  font_glyphsets: "GF_Latin_Core"
+
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
