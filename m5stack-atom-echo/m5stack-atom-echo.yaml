@@ -92,7 +92,7 @@ media_player:
 voice_assistant:
   id: va
   microphone: echo_microphone
-  media_player: echo_media_player
+#media_player: echo_media_player
   noise_suppression_level: 2
   auto_gain: 31dBFS
   volume_multiplier: 2.0
@@ -118,6 +118,16 @@ voice_assistant:
         green: 0%
         brightness: 100%
         effect: none
+  on_tts_end:
+    - homeassistant.service:
+        service: media_player.play_media
+        data:
+          entity_id: ${media_external}
+          media_content_type: music
+        data_template:
+          media_content_id: "{{ my_url }}"
+        variables:
+          my_url: return x;
   on_end:
     - delay: 100ms
     - script.execute: start_wake_word
