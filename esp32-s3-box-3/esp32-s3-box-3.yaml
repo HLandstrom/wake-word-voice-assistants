@@ -55,9 +55,8 @@ esp32:
   flash_size: 16MB
   cpu_frequency: 240MHz
   framework:
-    version: 5.5.2
-    platform_version: 55.03.37
     type: esp-idf
+    version: 5.5.1
     sdkconfig_options:
       CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
       CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
