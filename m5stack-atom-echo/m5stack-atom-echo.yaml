@@ -46,14 +46,17 @@ microphone:
     i2s_din_pin: GPIO23
     adc_type: external
     pdm: true
+    sample_rate: 16000
+    correct_dc_offset: true
 
 speaker:
   - platform: i2s_audio
     id: echo_speaker
     i2s_dout_pin: GPIO22
     dac_type: external
-    bits_per_sample: 32bit
-    channel: right
+    bits_per_sample: 16bit
+    sample_rate: 16000
+    channel: stereo  # The Echo has poor playback audio quality when using mon audio
     buffer_duration: 60ms
 
 media_player:
@@ -65,6 +68,7 @@ media_player:
       format: WAV
     codec_support_enabled: false
     buffer_size: 6000
+    volume_min: 0.4
     files:
       - id: timer_finished_wave_file
         file: https://github.com/esphome/wake-word-voice-assistants/raw/main/sounds/timer_finished.wav
@@ -73,14 +77,7 @@ media_player:
           condition:
             - microphone.is_capturing:
           then:
-            - if:
-                condition:
-                  lambda: return id(wake_word_engine_location).state == "On device";
-                then:
-                  - micro_wake_word.stop:
-                else:
-                  - voice_assistant.stop:
-            - script.execute: reset_led
+            - script.execute: stop_wake_word
       - light.turn_on:
           id: led
           blue: 100%
@@ -353,4 +350,13 @@ micro_wake_word:
         wake_word: !lambda return wake_word;
   vad:
   models:
+<<<<<<< HEAD
     - model: ${micro_wake_word_model}
+=======
+    - model: okay_nabu
+      id: okay_nabu
+    - model: hey_mycroft
+      id: hey_mycroft
+    - model: hey_jarvis
+      id: hey_jarvis
+>>>>>>> upstream/main
